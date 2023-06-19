@@ -1,25 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+// 1. import `ChakraProvider` component
+import { ChakraProvider } from '@chakra-ui/react'
+// 2. import `RouterProvider` component
+import { RouterProvider } from 'react-router-dom';
+// 3. import `router` property
+import {router} from './lib/routes.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default function App() {
+  return  
+  <ChakraProvider>
+    <RouterProvider router={router} />
+  </ChakraProvider>;
 }
 
-export default App;
