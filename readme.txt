@@ -14,3 +14,11 @@ Date: June 19, 2023
 
  - created a file called 'routes.js' inside the src/lib' directory
   * this file contains all routes for the project
+
+- created components directory in src folder
+    * created components/auth directory
+    * created Register.js
+    * created Login.js
+
+- Styled Login page
+- Added working routes to Login and Register Pages
