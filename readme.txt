@@ -27,3 +27,12 @@ Date: June 19, 2023
 - created .env file with SDK Keys for our Firebase project
 - added .env to .gitignore (we will add environment variables in vercel when we deploy later)
 
+- add useLogin method to hooks/auth.js
+- use useLogin() in components/auth/Login
+- import useToast in hooks/auth.js
+  * create toast message for successful logins
+  * create toast message for failed logins
+
+
+- installed react-hook-form
+  * npm i react-hook-form
