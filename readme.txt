@@ -22,3 +22,8 @@ Date: June 19, 2023
 
 - Styled Login page
 - Added working routes to Login and Register Pages
+
+- initialized Firebase project in Firebase Console
+- created .env file with SDK Keys for our Firebase project
+- added .env to .gitignore (we will add environment variables in vercel when we deploy later)
+
