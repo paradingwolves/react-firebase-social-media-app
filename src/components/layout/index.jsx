@@ -13,7 +13,7 @@ function Layout() {
     if (pathname.startsWith("/protected") && !user) {
       navigate(LOGIN);
     }
-  }, [pathname, user]);
+  }, [pathname, navigate, user]);
 
  if (isLoading) return "Loading...";
 

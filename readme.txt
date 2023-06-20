@@ -47,3 +47,5 @@ Date: June 20, 2023
 - create 'util' folder in 'src' directory
   * create 'form-validate.js' in src/util 
   * create 'isUsernameExists.js' in src/util
+
+- import 'emailValidate' and 'password' validate methods from 'form-validate.js' into Login.js
