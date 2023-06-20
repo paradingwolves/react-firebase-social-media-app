@@ -36,3 +36,14 @@ Date: June 19, 2023
 
 - installed react-hook-form
   * npm i react-hook-form
+
+
+
+
+
+
+Date: June 20, 2023
+
+- create 'util' folder in 'src' directory
+  * create 'form-validate.js' in src/util 
+  * create 'isUsernameExists.js' in src/util
