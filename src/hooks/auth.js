@@ -40,6 +40,7 @@ export function useLogin() {
                 position: "top",
                 duration: 5000,
             });
+            setLoading(false);
             return false; // return false if login failed
         }
 

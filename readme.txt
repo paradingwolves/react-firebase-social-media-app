@@ -1,10 +1,10 @@
 Date Created: June 19, 2023
-Project Name: Nut Face
-Project Purpose: This is a social media outlet for memes
+Project Name: Sun Parlour Baseball League Website
+Project Purpose: This is a social media outlet for Sun Parlour Baseball League
 Project Author: Justin Brierley
 
 
-Date: June 19, 2023
+-------------------- Date: June 19, 2023 --------------------
 
 - installed chakra ui
  * npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
@@ -39,13 +39,24 @@ Date: June 19, 2023
 
 
 
-
-
-
-Date: June 20, 2023
+-------------------- Date: June 20, 2023 --------------------
 
 - create 'util' folder in 'src' directory
   * create 'form-validate.js' in src/util 
   * create 'isUsernameExists.js' in src/util
 
 - import 'emailValidate' and 'password' validate methods from 'form-validate.js' into Login.js
+
+
+
+-------------------- Date: June 21, 2023 --------------------
+
+- added a test user to Firebase Users 
+- Login Form now works
+  * form resets after successful Login
+  * form validation works (Incorrect credentials get error message)
+
+- created a navbar that will display on every route
+  * created 'Home' and 'Logout' buttons
+
+-

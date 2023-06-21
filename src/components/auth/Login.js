@@ -1,5 +1,4 @@
-import React from 'react';
-// import Box, Button, Center, FormControl, FormErrorMessage, FormLabel, Heading, Input, Link, Text components 
+import React from 'react'; 
 import { Box, Button, Center, FormControl, FormErrorMessage, FormLabel, Heading, Input, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { REGISTER, DASHBOARD } from '../../lib/routes';
@@ -10,11 +9,15 @@ import { emailValidate, passwordValidate } from '../../util/form-validate';
 const Login = () => {
 
     const {login, isLoading} = useLogin();
-    const {register, handleSubmit, reset} = useForm();
+    const {register, handleSubmit, reset, formState:{errors}} = useForm();
+
+    console.log(errors); 
 
     async function handleLogin(data) {
-        await login({email: data.email, password: data.password, redirectTo: DASHBOARD});
-        reset();
+        const succeeded = await login({email: data.email, password: data.password, redirectTo: DASHBOARD});
+        if (succeeded) {
+            reset();
+        }
     }
 
   return (
@@ -24,16 +27,16 @@ const Login = () => {
 
             <form onSubmit={handleSubmit(handleLogin)}>
             {/* Email input field */}
-            <FormControl /* isInvalid={false} */ py="2">
+            <FormControl isInvalid={errors.email} py="2">
                     <FormLabel>Email</FormLabel>
                     <Input type="email" placeholder='user@email.com' {...register('email', emailValidate)} />
-                    <FormErrorMessage>Please Enter a Valid Email Address</FormErrorMessage>
+                    <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
                 </FormControl>
                 {/* Password input field */}
-                <FormControl /* isInvalid={false} */ py="2">
+                <FormControl isInvalid={errors.password} py="2">
                     <FormLabel>Password</FormLabel>
                     <Input type="password" placeholder='Password' {...register('password', passwordValidate)} />
-                    <FormErrorMessage>Incorrect Password</FormErrorMessage>
+                    <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
                 {/* Submit button */}
                 <Button mt="4" type='submit' colorScheme='teal' size='md' w='full' /* isLoading={false} */ loadingText="Logging In">Log In</Button>
