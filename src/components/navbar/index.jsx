@@ -2,8 +2,10 @@ import React from 'react';
 import { Flex, Link, Button } from '@chakra-ui/react';
 import { Link as RouterLink} from 'react-router-dom';
 import { DASHBOARD } from '../../lib/routes';
+import { useLogout } from '../../hooks/auth';
 
 const Navbar = () => {
+  const {logout, isLoading} = useLogout();
   return (
     <Flex
       shadow="sm"
@@ -19,7 +21,13 @@ const Navbar = () => {
         <Link color="teal" as={RouterLink} to={DASHBOARD} fontWeight="bold">
           Home
         </Link>
-        <Button ml="auto" colorScheme="teal" size="sm">
+        <Button 
+          ml="auto" 
+          colorScheme="teal" 
+          size="sm"
+          onClick={logout}
+          isLoading={isLoading}
+        >
           Log Out
         </Button>
       </Flex>

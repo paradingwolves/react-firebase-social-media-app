@@ -59,4 +59,10 @@ Project Author: Justin Brierley
 - created a navbar that will display on every route
   * created 'Home' and 'Logout' buttons
 
--
+- create logout and sign in hooks
+  * create toast messages for both 
+  
+- create Register page/functionality 
+  * create useRegister hook in hooks/auth.js
+  * create UI for Register page
+  * users can now register am account
