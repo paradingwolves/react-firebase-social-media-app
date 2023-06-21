@@ -1,6 +1,6 @@
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { auth, db } from '../lib/firebase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DASHBOARD, LOGIN } from '../lib/routes';
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth';
@@ -10,9 +10,27 @@ import  isUsernameExists  from '../util/isUsernameExists';
 
 
 export function useAuth() {
-    const [authUser, isLoading, error] = useAuthState(auth);
+    const [authUser, authLoading, error] = useAuthState(auth);
+    const [isLoading, setLoading] = useState(true); // true because useAuth() always loads when the page loads
+    const [user, setUser] = useState(null);
 
-    return {user: authUser, isLoading, error};
+    // everytime authLoading changes, the useEffect hook runs
+    useEffect(() => {
+        async function fetchData() {
+            setLoading(true);
+            const ref = doc(db, "users", authUser.uid);
+            const docSnap = await getDoc(ref);
+            setUser(docSnap.data());
+            setLoading(false);
+        }
+
+        if (!authLoading) {
+            if (authUser) fetchData();
+            else setLoading(false); // Not signed in
+          }
+        }, [authLoading]);
+
+    return {user, isLoading, error};
 }
 
 // hook to sign users in
@@ -20,39 +38,41 @@ export function useLogin() {
     const [isLoading, setLoading] = useState(false);
     const toast = useToast();
     const navigate = useNavigate();
+  
+    async function login({ email, password, redirectTo = DASHBOARD }) {
+      setLoading(true);
+  
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        toast({
+          title: "You are logged in",
+          status: "success",
+          isClosable: true,
+          position: "top",
+          duration: 5000,
+        });
+        console.log(redirectTo);
 
-    async function login({email, password, redirectTo=DASHBOARD}) {
-        setLoading(true);
-
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            // display success message if log in is successful
-            toast({
-                title: "You Are Logged In",
-                status: "success",
-                isClosable: true,
-                position: "top",
-                duration: 5000,
-            });
-            navigate(redirectTo);
-        } catch(error) {
-            // display error message if log in failed
-            toast({
-                title: "Logging in failed",
-                status: "error",
-                description: error.message,
-                isClosable: true,
-                position: "top",
-                duration: 5000,
-            });
-            setLoading(false);
-            return false; // return false if login failed
-        }
+        navigate(redirectTo);
+        
+      } catch (error) {
+        toast({
+          title: "Logging in failed",
+          description: error.message,
+          status: "error",
+          isClosable: true,
+          position: "top",
+          duration: 5000,
+        });
         setLoading(false);
-        return true; // return true if login succeeded
-    } 
-    return {login, isLoading}
-}
+      } finally {
+            setLoading(false);
+      }
+    }
+  
+    return { login, isLoading };
+  }
+
 
 // hook to register new users in Firebase
 export function useRegister() {

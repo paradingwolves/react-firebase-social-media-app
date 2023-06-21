@@ -6,6 +6,8 @@ import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
 // import `layout` component
 import Layout from '../components/layout/index.jsx';
+// import Dashboard component
+import Dashboard from "../components/dashboard";
 
 // home route 
 export const ROOT = "/";
@@ -29,7 +31,7 @@ export const router = createBrowserRouter ([
         children: [
             {
                 path: DASHBOARD,
-                element:"Dashboard"
+                element: <Dashboard />
             }
         ],
     },

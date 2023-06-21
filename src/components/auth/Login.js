@@ -39,7 +39,7 @@ const Login = () => {
                     <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
                 {/* Submit button */}
-                <Button mt="4" type='submit' colorScheme='teal' size='md' w='full' /* isLoading={false} */ loadingText="Logging In">Log In</Button>
+                <Button mt="4" type='submit' colorScheme='teal' size='md' w='full' isLoading={false} loadingText="Logging In">Log In</Button>
             </form>
 
             <Text fontSize="xlg" align="center" mt="6">

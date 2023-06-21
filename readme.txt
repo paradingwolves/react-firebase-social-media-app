@@ -66,3 +66,5 @@ Project Author: Justin Brierley
   * create useRegister hook in hooks/auth.js
   * create UI for Register page
   * users can now register am account
+
+ERROR: user is redirected to login page after signing in -> should redirect to DASHBOARD
