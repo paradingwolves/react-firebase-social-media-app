@@ -86,3 +86,10 @@ PROBLEM SOLVED: users created in Firebase console cannot be redirected to the DA
   * All Users button links to "All Users" element
 
 - Time to start developing the Dashboard 
+- create the Post form using Chakra UI components
+- to prevent scrolling within text box and have it automatically resize: npm i react-textarea-autosize
+
+- created 'posts.js' in 'hooks' directory
+  * handles the creation of posts
+- logged in users can now add a post to the Firebase db with the form on the dashboard
+  * a toast message will alert the user if the post was successful
