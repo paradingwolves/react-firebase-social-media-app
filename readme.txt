@@ -68,3 +68,21 @@ Project Author: Justin Brierley
   * users can now register am account
 
 ERROR: user is redirected to login page after signing in -> should redirect to DASHBOARD
+PROBLEM SOLVED: users created in Firebase console cannot be redirected to the DASHBOARD because a user id was not generated
+  - user id is only generated in the Register form, not the console 
+
+
+-------------------- Date: June 27, 2023 --------------------
+
+- added <Sidebar /> to `Layouts/index.jsx`
+- by default this appears on the left side of the screen, which is not desired for this project
+  * to fix, wrap the <Sidebar /> and the <Outlet /> elements like so: 
+        <Flex pt="16" pb="12" mx="auto" w="full" maxW="1200px"><Box w="900px"><Outlet /><Sidebar /></ Box></ Flex>
+
+- add ActiveUser Component to Sidebar 
+  * user profile picture
+  * display username
+  * Edit Profile button and Avatar link to "Edit Profile" element
+  * All Users button links to "All Users" element
+
+- Time to start developing the Dashboard 

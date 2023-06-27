@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 import Navbar from './NavBar';
 import SideBar from './SideBar';
+import { Box, Flex } from '@chakra-ui/react';
 
 function Layout() {
   const { pathname } = useLocation();
@@ -22,7 +23,13 @@ function Layout() {
   return (
     <>
         <Navbar />
-        This is the child: <Outlet />
+        <Flex pt="16" pb="12" mx="auto" w="full" maxW="1200px">
+          <Box w="900px">
+            This is the child: <Outlet />
+          </Box>
+          <SideBar />
+        </Flex>
+        
     </>
   );
 }
