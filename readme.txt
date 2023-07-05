@@ -93,3 +93,25 @@ PROBLEM SOLVED: users created in Firebase console cannot be redirected to the DA
   * handles the creation of posts
 - logged in users can now add a post to the Firebase db with the form on the dashboard
   * a toast message will alert the user if the post was successful
+
+  
+-------------------- Date: July 3, 2023 --------------------
+
+- create PostLists component
+- create post component
+
+-------------------- Date: July 5, 2023 --------------------
+
+Posts are now being retrieved from the Firestore DB. Post component uses Header component. The header component 
+contains the profile picture and username of the poster, as well as a timestamp for when the post was created.
+
+- complete PostList & Post components
+- create Header component for Post
+  * Post is the structure of a single post which is fed by the Firestore db called 'posts'
+  * Header is the header for each post
+  * PostList maps thru Post objects 
+
+- create file users.js in /hooks directory
+  * this file has all of the user related hooks
+    1. useUser: 
+    2. 

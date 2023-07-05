@@ -1,8 +1,9 @@
 import {uuidv4} from '@firebase/util';  // Importing the uuidv4 function from the '@firebase/util' module
-import { setDoc, doc } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
+import { setDoc, doc, query, collection, orderBy } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
 import { useState } from "react";  // Importing the useState hook from the "react" module
 import { db } from '../lib/firebase';  // Importing the db object from the '../lib/firebase' module
 import { useToast } from '@chakra-ui/react';  // Importing the useToast hook from the '@chakra-ui/react' module
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 export default function useAddPost() {
 
@@ -30,4 +31,14 @@ export default function useAddPost() {
     }
 
     return {addPost, isLoading};  // Returning an object with the 'addPost' function and the 'isLoading' state variable
+}
+
+export function usePosts() { // this is a hook to make a query to the db to find the posts
+    const dbQuery = query(collection(db, "posts"),orderBy('date', 'desc')); // query the Firetore collection "posts" and filter by Date
+
+    const [posts, isLoading, error] = useCollectionData(dbQuery);
+
+    if (error) throw error;
+    return {posts, isLoading};
+
 }
