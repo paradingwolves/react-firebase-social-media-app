@@ -1,15 +1,20 @@
 import { Box, Text } from "@chakra-ui/react";
 import Header from "./Header";
+import Actions from "./Actions";
+
 export default function Post({ post }) {
-    const {uid, text, date} = post;
+    const { text } = post;
 
     return (
-        <Box p="2" maxW="600px">
+        <Box p="2" maxW="600px" textAlign="left">
             <Box border="2px solid" borderColor="gray.100" borderRadius="md">
-                <Header uid={uid} date={date}/> {/* Call the Header component created in /post/ */}
-                <Text wordBreak="break-word" font-size="md">
-                    {text}
-                </Text>
+                <Header post={post}/> {/* Call the Header component created in /post/ */}
+                <Box p="2" minH="100px">
+                    <Text wordBreak="break-word" font-size="md">
+                        {text}
+                    </Text>
+                </Box>
+                <Actions post={post} />
             </Box>
         </Box>
     );

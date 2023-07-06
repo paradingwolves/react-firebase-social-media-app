@@ -1,5 +1,5 @@
 import {uuidv4} from '@firebase/util';  // Importing the uuidv4 function from the '@firebase/util' module
-import { setDoc, doc, query, collection, orderBy } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
+import { setDoc, doc, query, collection, orderBy, updateDoc, arrayRemove, arrayUnion } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
 import { useState } from "react";  // Importing the useState hook from the "react" module
 import { db } from '../lib/firebase';  // Importing the db object from the '../lib/firebase' module
 import { useToast } from '@chakra-ui/react';  // Importing the useToast hook from the '@chakra-ui/react' module
@@ -41,4 +41,29 @@ export function usePosts() { // this is a hook to make a query to the db to find
     if (error) throw error;
     return {posts, isLoading};
 
+}
+
+/**
+ * Custom hook for toggling the like status of a post.
+ * @param {Object} options - Options for toggling the like.
+ * @param {string} options.id - The ID of the post.
+ * @param {boolean} options.isLiked - Indicates if the post is already liked.
+ * @param {string} options.uid - The ID of the user performing the like.
+ * @returns {Object} - An object containing the toggle function and loading status.
+ */
+export function useToggleLike({ id, isLiked, uid }) {
+    const [isLoading, setLoading] = useState(false);
+    /**
+     * Toggle the like status of the post.
+     */
+    async function toggleLike() {
+        setLoading(true);
+        const docRef = doc(db, "posts", id);
+        await updateDoc(docRef, {
+            likes: isLiked ? arrayRemove(uid) : arrayUnion(uid),
+        });
+        setLoading(false);
+    }
+
+    return {toggleLike, isLoading}
 }

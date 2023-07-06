@@ -115,3 +115,21 @@ contains the profile picture and username of the poster, as well as a timestamp 
   * this file has all of the user related hooks
     1. useUser: 
     2. 
+
+-------------------- Date: July 6, 2023 --------------------
+
+Time to format the timestamp on the posts!
+
+We need to install a date-formatting library to convert the timestamp to a readable date.
+  - npm i date-fns
+  - in post/Header.jsx, import { formatDistanceToNow } from 'date-fns';
+
+Time to create the Actions component. This component holds the "Like", "Comment", "Delete" buttons.
+- create Actions.jsx in Components/post/ directory
+
+This is a React functional component. We will need to install an icon library to add icons to our buttons.
+  - npm i react-icons
+
+To create the Like function, create the useToggleLike hook in src/hooks/posts.js 
+  - this hook is responsible for liking and unliking a post by updating the "likes" field (array)
+  in an object in the "posts" collection
