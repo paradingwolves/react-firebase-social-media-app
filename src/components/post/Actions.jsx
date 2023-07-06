@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex, IconButton } from '@chakra-ui/react';
-import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart, FaComment, FaRegComment } from "react-icons/fa";
 import { useAuth } from '../../hooks/auth';
 import { useToggleLike } from '../../hooks/posts';
 
@@ -28,6 +28,18 @@ const Actions = ({ post }) => {
                     colorScheme="red"
                     variant="ghost"
                     icon={isLiked ? <FaHeart /> : <FaRegHeart />}
+                />
+                {likes.length} {/* Display the number of likes */}
+            </Flex>
+            <Flex alignItems="center" ml="2">
+                <IconButton
+                   /*  onClick={toggleLike}
+                    isLoading={likeLoading || userLoading} */
+                    size="md"
+                    colorScheme="teal"
+                    variant="ghost"
+                    /* icon={isLiked ? <FaComment /> : <FaRegComment />} */
+                    icon={<FaComment />}
                 />
                 {likes.length} {/* Display the number of likes */}
             </Flex>
