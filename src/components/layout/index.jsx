@@ -25,7 +25,7 @@ function Layout() {
         <Navbar />
         <Flex pt="16" pb="12" mx="auto" w="full" maxW="1200px">
           <Box w="900px">
-            This is the child: <Outlet />
+            <Outlet />
           </Box>
           <SideBar />
         </Flex>

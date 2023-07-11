@@ -141,3 +141,5 @@ To create the Like function, create the useToggleLike hook in src/hooks/posts.js
 
 Time to create the Delete button in Actions.jsx:
   - only the user who uploaded the post can delete it
+
+In order to add the ability to comment on posts, we need to create the NewComment component
