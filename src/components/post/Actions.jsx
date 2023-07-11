@@ -5,6 +5,7 @@ import { useAuth } from '../../hooks/auth';
 import { useToggleLike, useDeletePost } from '../../hooks/posts';
 import { Link } from 'react-router-dom';
 import { PROTECTED } from '../../lib/routes';
+import { useComments } from '../../hooks/comments';
 
 /**
  * Component for rendering actions related to a post, such as liking.
@@ -21,6 +22,7 @@ const Actions = ({ post }) => {
 
     const  {deletePost, isLoading: deleteLoading } = useDeletePost(id);
     
+    const { comments, isLoading: commentsLoading } = useComments(id);
     
     return (
         <Flex p="2">
@@ -46,13 +48,13 @@ const Actions = ({ post }) => {
                     /* icon={isLiked ? <FaComment /> : <FaRegComment />} */
                     icon={<FaRegComment />}
                 />
-                5{/* {comments.length} */} {/* Display the number of comments */}
+                {comments?.length} {/* Display the number of comments */}
             </Flex>
             <Flex alignItems="center" ml="2">
                 <IconButton
                     ml="auto"
                     onClick={deletePost}
-                   /*  isLoading={likeLoading || userLoading} */
+                    isLoading={deleteLoading}
                     size="md"
                     colorScheme="red"
                     variant="ghost"
