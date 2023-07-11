@@ -1,8 +1,10 @@
 import React from 'react';
 import { Flex, IconButton } from '@chakra-ui/react';
-import { FaRegHeart, FaHeart, FaComment, FaRegComment } from "react-icons/fa";
+import { FaRegHeart, FaHeart, FaComment, FaRegComment, FaTrashAlt } from "react-icons/fa";
 import { useAuth } from '../../hooks/auth';
-import { useToggleLike } from '../../hooks/posts';
+import { useToggleLike, useDeletePost } from '../../hooks/posts';
+import { Link } from 'react-router-dom';
+import { PROTECTED } from '../../lib/routes';
 
 /**
  * Component for rendering actions related to a post, such as liking.
@@ -16,6 +18,8 @@ const Actions = ({ post }) => {
     const isLiked = likes.includes(user?.id); // variable to indicate if the post is liked
 
     const {toggleLike, isLoading: likeLoading } = useToggleLike({id, isLiked, uid: user?.id});
+
+    const  {deletePost, isLoading: deleteLoading } = useDeletePost(id);
     
     
     return (
@@ -33,15 +37,28 @@ const Actions = ({ post }) => {
             </Flex>
             <Flex alignItems="center" ml="2">
                 <IconButton
-                   /*  onClick={toggleLike}
-                    isLoading={likeLoading || userLoading} */
+                    as={Link}
+                    to={`${PROTECTED}/comments/${id}`}
+/*                     isLoading={likeLoading || userLoading} */
                     size="md"
                     colorScheme="teal"
                     variant="ghost"
                     /* icon={isLiked ? <FaComment /> : <FaRegComment />} */
-                    icon={<FaComment />}
+                    icon={<FaRegComment />}
                 />
-                {likes.length} {/* Display the number of likes */}
+                5{/* {comments.length} */} {/* Display the number of comments */}
+            </Flex>
+            <Flex alignItems="center" ml="2">
+                <IconButton
+                    ml="auto"
+                    onClick={deletePost}
+                   /*  isLoading={likeLoading || userLoading} */
+                    size="md"
+                    colorScheme="red"
+                    variant="ghost"
+                    /* icon={isLiked ? <FaComment /> : <FaRegComment />} */
+                    icon={<FaTrashAlt />}
+                />
             </Flex>
         </Flex>
     );

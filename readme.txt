@@ -133,3 +133,11 @@ This is a React functional component. We will need to install an icon library to
 To create the Like function, create the useToggleLike hook in src/hooks/posts.js 
   - this hook is responsible for liking and unliking a post by updating the "likes" field (array)
   in an object in the "posts" collection
+
+-------------------- Date: July 10, 2023 --------------------
+
+- to get the comments button to work, create and export the route in lib/routes.js
+- comment button now brings user to the Comment component using the usePost() hook
+
+Time to create the Delete button in Actions.jsx:
+  - only the user who uploaded the post can delete it

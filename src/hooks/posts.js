@@ -1,9 +1,9 @@
 import {uuidv4} from '@firebase/util';  // Importing the uuidv4 function from the '@firebase/util' module
-import { setDoc, doc, query, collection, orderBy, updateDoc, arrayRemove, arrayUnion } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
+import { setDoc, doc, query, collection, orderBy, updateDoc, arrayRemove, arrayUnion, getDocs, where, deleteDoc } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
 import { useState } from "react";  // Importing the useState hook from the "react" module
 import { db } from '../lib/firebase';  // Importing the db object from the '../lib/firebase' module
 import { useToast } from '@chakra-ui/react';  // Importing the useToast hook from the '@chakra-ui/react' module
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 
 export default function useAddPost() {
 
@@ -66,4 +66,44 @@ export function useToggleLike({ id, isLiked, uid }) {
     }
 
     return {toggleLike, isLoading}
+}
+
+export function useDeletePost(id) {
+    const [isLoading, setLoading] = useState(false);
+    const toast = useToast();
+  
+    async function deletePost() {
+      const res = window.confirm("Are you sure you want to delete this post?");
+  
+      if (res) {
+        setLoading(true);
+  
+        // Delete post document
+        await deleteDoc(doc(db, "posts", id));
+  
+        // Delete comments
+        const q = query(collection(db, "comments"), where("postID", "==", id));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(async (doc) => deleteDoc(doc.ref));
+  
+        toast({
+          title: "Post deleted!",
+          status: "info",
+          isClosable: true,
+          position: "top",
+          duration: 5000,
+        });
+  
+        setLoading(false);
+      }
+    }
+  
+    return { deletePost, isLoading };
+  }
+
+export function usePost(id)  { // hook for displaying a specific post
+    const q = doc(db, "posts", id);
+    const [post, isLoading] = useDocumentData(q);
+
+    return {post, isLoading};
 }

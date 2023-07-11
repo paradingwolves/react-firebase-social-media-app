@@ -8,6 +8,8 @@ import Login from '../components/auth/Login';
 import Layout from '../components/layout/index.jsx';
 // import Dashboard component
 import Dashboard from "../components/dashboard";
+// import Comments component
+import Comments from "../components/comments";
 
 // home route 
 export const ROOT = "/";
@@ -23,6 +25,8 @@ export const DASHBOARD = "/protected/dashboard";
 export const USERS = "/protected/users";
 // profile route
 export const PROFILE = "/protected/profile/:id"
+// comments route
+export const COMMENTS = "/protected/comments/:id";
 
 // create routes
 export const router = createBrowserRouter ([
@@ -44,6 +48,9 @@ export const router = createBrowserRouter ([
             {
                 path: PROFILE,
                 element: "Profile"
+            },{
+                path: COMMENTS,
+                element: <Comments />
             },
         ],
     },
