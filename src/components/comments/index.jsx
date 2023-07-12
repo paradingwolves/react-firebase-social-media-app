@@ -6,18 +6,23 @@ import { useParams } from 'react-router-dom';
 import NewComment from './NewComment';
 import CommentList from './CommentList';
 
+/**
+ * Component for rendering comments for a specific post.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const Comments = () => {
-  const {id} = useParams(); // the value of id depends on what you name the id in the COMMENTS route ("/protected/comments/:id") params = id
-  const {post, isLoading} = usePost(id);
-  
-  
-  if (isLoading) return "Loading post";
+  const { id } = useParams(); // Extracting the ID parameter from the URL using the useParams hook
+  const { post, isLoading } = usePost(id); // Fetching the post data and loading status using the usePost hook
 
-  return <Box align="center" pt="50">
-    <Post post={post}/>
-      <NewComment post={post} />
-      <CommentList post={post} />
-  </Box>
+  if (isLoading) return "Loading post"; // Display "Loading post" if the post data is still loading
+
+  return (
+    <Box align="center" pt="50">
+      <Post post={post} /> {/* Render the Post component for the post */}
+      <NewComment post={post} /> {/* Render the NewComment component for the post */}
+      <CommentList post={post} /> {/* Render the CommentList component for the post */}
+    </Box>
+  );
 }
 
 export default Comments;

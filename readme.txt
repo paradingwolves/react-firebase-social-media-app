@@ -144,7 +144,9 @@ Time to create the Delete button in Actions.jsx:
 
 In order to add the ability to comment on posts, we need to create the NewComment component
 
-To see comments, create the CommentList.jsx component in the components/comments directory
+Create Comment component that will hold the data for each comment on each post.
+To see comments, create the CommentList.jsx component in the components/comments directory. 
+
 
 I also had to create an index in the Firebase Console in order to get the CommentList component working
   - Collection ID: comments
