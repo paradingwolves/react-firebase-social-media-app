@@ -1,5 +1,15 @@
 import {uuidv4} from '@firebase/util';  // Importing the uuidv4 function from the '@firebase/util' module
-import { setDoc, doc, query, collection, orderBy, updateDoc, arrayRemove, arrayUnion, getDocs, where, deleteDoc } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
+import { arrayRemove,
+    arrayUnion,
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    orderBy,
+    query,
+    setDoc,
+    updateDoc,
+    where } from "firebase/firestore";  // Importing the setDoc and doc functions from the "firebase/firestore" module
 import { useState } from "react";  // Importing the useState hook from the "react" module
 import { db } from '../lib/firebase';  // Importing the db object from the '../lib/firebase' module
 import { useToast } from '@chakra-ui/react';  // Importing the useToast hook from the '@chakra-ui/react' module
@@ -33,15 +43,7 @@ export default function useAddPost() {
     return {addPost, isLoading};  // Returning an object with the 'addPost' function and the 'isLoading' state variable
 }
 
-export function usePosts() { // this is a hook to make a query to the db to find the posts
-    const dbQuery = query(collection(db, "posts"),orderBy('date', 'desc')); // query the Firetore collection "posts" and filter by Date
 
-    const [posts, isLoading, error] = useCollectionData(dbQuery);
-
-    if (error) throw error;
-    return {posts, isLoading};
-
-}
 
 /**
  * Custom hook for toggling the like status of a post.
@@ -107,3 +109,26 @@ export function usePost(id)  { // hook for displaying a specific post
 
     return {post, isLoading};
 }
+
+/**
+ * Custom hook for fetching posts from the database.
+ * @param {string} uid - Optional user ID to filter posts by user.
+ * @returns {Object} - The fetched posts and loading status.
+ */
+export function usePosts(uid = null) {
+    // Create a Firestore query based on the provided user ID (if any)
+    const q = uid
+      ? query(
+          collection(db, 'posts'),
+          orderBy('date', 'desc'),
+          where('uid', '==', uid)
+        )
+      : query(collection(db, 'posts'), orderBy('date', 'desc'));
+  
+    // Use the useCollectionData hook to fetch the posts and loading status
+    const [posts, isLoading, error] = useCollectionData(q);
+  
+    if (error) throw error; // Throw an error if there's an error in fetching the posts
+  
+    return { posts, isLoading };
+  }

@@ -153,3 +153,11 @@ I also had to create an index in the Firebase Console in order to get the Commen
     - postID: ascending
     - date: ascending
   - Query Scope: Collection
+
+-------------------- Date: July 12, 2023 --------------------
+
+It is now time to create the User Profile page.
+  - in the components/profile directory, create a file named index.jsx
+    * this will be the user profile page
+  - in this file, create a React Functional Component (rafce)
+  - rename the function from 'index' to 'Profile'

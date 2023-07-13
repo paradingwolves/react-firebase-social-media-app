@@ -10,6 +10,8 @@ import Layout from '../components/layout/index.jsx';
 import Dashboard from "../components/dashboard";
 // import Comments component
 import Comments from "../components/comments";
+// import Profile component
+import Profile from "../components/profile";
 
 // home route 
 export const ROOT = "/";
@@ -47,7 +49,7 @@ export const router = createBrowserRouter ([
             },
             {
                 path: PROFILE,
-                element: "Profile"
+                element: <Profile />
             },{
                 path: COMMENTS,
                 element: <Comments />
