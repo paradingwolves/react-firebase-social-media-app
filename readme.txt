@@ -161,3 +161,11 @@ It is now time to create the User Profile page.
     * this will be the user profile page
   - in this file, create a React Functional Component (rafce)
   - rename the function from 'index' to 'Profile'
+  - we need to create an index in the Firebase Console: 
+    * Collection: posts
+    * Field 1: uid - ascending
+    * Field 2: date - descending
+
+  - update the 'usePosts' hook in 'hooks/posts.js' directory so that it will display the 
+    posts in order of newest to oldest (this is where that index comes in handy)
+  - 
