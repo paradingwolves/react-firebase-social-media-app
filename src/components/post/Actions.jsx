@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex, IconButton } from '@chakra-ui/react';
-import { FaRegHeart, FaHeart, FaComment, FaRegComment, FaTrashAlt } from "react-icons/fa";
+import { FaRegHeart, FaHeart, FaComment, FaRegComment, FaTrash, FaTrashAlt } from "react-icons/fa";
 import { useAuth } from '../../hooks/auth';
 import { useToggleLike, useDeletePost } from '../../hooks/posts';
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { useComments } from '../../hooks/comments';
  * @returns {JSX.Element} - The rendered component.
  */
 const Actions = ({ post }) => {
-    const {id, likes } = post; // Destructuring the post object to get the 'likes' attribute
+    const {id, likes, uid } = post; // Destructuring the post object to get the 'likes' attribute
     const {user, isLoading: userLoading} = useAuth();
 
     const isLiked = likes.includes(user?.id); // variable to indicate if the post is liked
@@ -51,16 +51,18 @@ const Actions = ({ post }) => {
                 {comments?.length} {/* Display the number of comments */}
             </Flex>
             <Flex alignItems="center" ml="2">
+            {!userLoading && user.id === uid && (
                 <IconButton
-                    ml="auto"
-                    onClick={deletePost}
-                    isLoading={deleteLoading}
-                    size="md"
-                    colorScheme="red"
-                    variant="ghost"
-                    /* icon={isLiked ? <FaComment /> : <FaRegComment />} */
-                    icon={<FaTrashAlt />}
+                ml="auto"
+                onClick={deletePost}
+                isLoading={deleteLoading}
+                size="md"
+                colorScheme="red"
+                variant="ghost"
+                icon={<FaTrash />}
+                isRound
                 />
+            )}
             </Flex>
         </Flex>
     );

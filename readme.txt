@@ -168,4 +168,18 @@ It is now time to create the User Profile page.
 
   - update the 'usePosts' hook in 'hooks/posts.js' directory so that it will display the 
     posts in order of newest to oldest (this is where that index comes in handy)
-  - 
+
+-------------------- Date: July 13, 2023 --------------------
+
+Time to finish the project. Adding the All Users button functionality.
+We want this button to display all the registered users on the web page.
+
+Step 1. Create the 'users' component by creating a file called 'users' in the 'components' folder
+Step 2. Create two files inside this new folder called 'index.jsx' and 'User.jsx'
+        - User.jsx is a template for each users display card
+        - index.jsx maps through all the users using the User component 
+
+Step 3. Update the USERS route in lib/routes.js 
+
+I have updated Actions.jsx in the post component so that posts may only be deleted by the 
+the author of the post.
