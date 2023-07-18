@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Divider, Flex, HStack, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import PostsList from '../post/PostList';
 import { usePosts } from '../../hooks/posts';
@@ -24,6 +24,17 @@ const Profile = () => {
   const { user, isLoading: userLoading } = useUser(id); // Fetching the user data and loading status using the useUser hook
   const { user: authUser, isLoading: authLoading } = useAuth(); // Fetching the authenticated user data and loading status using the useAuth hook
   const { isOpen, onOpen, onClose } = useDisclosure(); // Managing the state of the avatar change dialog using the useDisclosure hook
+  const [totalLikes, setTotalLikes] = useState(0);
+
+  useEffect(() => {
+    let likes = 0;
+    if (posts) {
+      posts.forEach(post => {
+        likes += post.likes.length;
+      });
+    }
+    setTotalLikes(likes);
+  }, [posts]);
 
   if (userLoading) return "Loading..."; // Display "Loading..." if the user data is still loading
 
@@ -44,16 +55,16 @@ const Profile = () => {
           </Button>
         )}
         <Stack ml="10">
-          <Text fontSize="2xl">{user.username}</Text> {/* Display the user's username */}
+          {/* ... */}
           <HStack spacing="10">
             <Text color="gray.700" fontSize={["sm", "lg"]}>
-              Posts: {posts.length} {/* Display the number of posts */}
+              Posts: {posts ? posts.length : 0}
             </Text>
             <Text color="gray.700" fontSize={["sm", "lg"]}>
-              Likes: todo! {/* Placeholder for displaying the number of likes */}
+              Likes: {totalLikes}
             </Text>
             <Text color="gray.700" fontSize={["sm", "lg"]}>
-              Joined: {format(user.date, "MMMM yyyy")} {/* Display the joined date */}
+              Joined: {format(user.date, "MMMM yyyy")}
             </Text>
           </HStack>
         </Stack>
